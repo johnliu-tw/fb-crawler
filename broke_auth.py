@@ -3,6 +3,8 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import os
 import time
+from dotenv import load_dotenv
+load_dotenv()
 
 options = Options()
 options.add_argument("--disable-notifications")
@@ -28,6 +30,8 @@ radio.click()
 keepGo = driver.find_elements_by_css_selector("#checkpointSubmitButton")[0]
 keepGo.click()
 
-keepGo = driver.find_elements_by_css_selector("#checkpointSubmitButton")[0]
-keepGo.click()
-time.sleep(2)
+check = input('請輸入 start 已繼續：')
+if (check == 'start'):
+  keepGo = driver.find_elements_by_css_selector("#checkpointSubmitButton")[0]
+  keepGo.click()
+  time.sleep(2)
