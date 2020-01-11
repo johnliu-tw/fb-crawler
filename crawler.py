@@ -8,6 +8,7 @@ from datetime import datetime, date, timedelta
 import pymysql.cursors
 import traceback
 from dotenv import load_dotenv
+import broke_auth
 load_dotenv()
 deadline = str(date.today() + timedelta(weeks= -4))
                
@@ -23,7 +24,6 @@ options.add_argument('--headless')
 options.experimental_options["prefs"] = {'profile.default_content_settings' : {"images": 2}, 
                                         'profile.managed_default_content_settings' :  {"images": 2}}
 driver = webdriver.Chrome(os.getcwd() + '/chromedriver', chrome_options=options)
-
 try:
     with connection.cursor() as cursor:
         driver.get('https://www.facebook.com')
@@ -35,6 +35,7 @@ try:
         login_button = driver.find_elements_by_css_selector("input[type=submit]")[0]
         driver.set_window_size(1024, 768)
         login_button.click()
+        broke_auth.check_auth(driver)
         time.sleep(2)
         driver.get('https://www.facebook.com/farmbridger/')
         
