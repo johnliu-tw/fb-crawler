@@ -30,8 +30,18 @@ radio.click()
 keepGo = driver.find_elements_by_css_selector("#checkpointSubmitButton")[0]
 keepGo.click()
 
-check = input('請輸入 start 已繼續：')
+check = input('確認在手機解鎖後，請輸入 start ：')
 if (check == 'start'):
   keepGo = driver.find_elements_by_css_selector("#checkpointSubmitButton")[0]
   keepGo.click()
   time.sleep(2)
+
+  username = driver.find_elements_by_css_selector("input[name=email]")[0]
+  username.send_keys(os.getenv("EMAIL"))
+  password = driver.find_elements_by_css_selector("input[name=pass]")[0]
+  password.send_keys(os.getenv("PASSWORD"))
+  login_button = driver.find_elements_by_css_selector("input[type=submit]")[0]
+  login_button.click()
+
+driver.close()
+
